@@ -3,6 +3,8 @@ import argparse
 # quick sort using recursion 
 # uses a pivot to rearrange all the elements in the array to either left or right of the pivot
 # works on each side of the pivot recursively
+# average time complexity O(nlogn)
+# worst case O(n2) for an already sorted array
 
 def quick_sort(arr:list) -> list:
     """
