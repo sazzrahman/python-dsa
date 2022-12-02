@@ -59,7 +59,7 @@ class SinglyLinkedList:
 
 
 
-    def unshift(self, val:int) -> Node:
+    def unshift(self, val:int) -> None:
         """
         inserts a node at the beginning of the list
         returns the new Linked list
@@ -77,10 +77,8 @@ class SinglyLinkedList:
         
         self.length +=1
 
-        return self
 
 
-        
 
 
     def get(self,i:int) -> int:
@@ -99,6 +97,37 @@ class SinglyLinkedList:
                 return current_node.val
             current_node = current_node.next
             n+=1
+
+
+
+    def insert(self,idx:int,val:int) -> None:
+        if idx == 0:
+            self.unshift(val)
+        if idx >= self.length:
+            self.push(val)
+
+        else:
+            n = 0
+            current_node = self.head
+            
+            while n <= idx-1:
+                if n==idx-1:
+                    # the prev node is modified in place
+                    prev_node = current_node
+                    next_node = current_node.next
+                    new_node = Node(val)
+                    # the new node's tail should have all next nodes
+                    new_node.next = next_node
+
+                    # the node before it should have the current node
+                    prev_node.next = new_node
+                    self.length +=1
+
+                current_node = current_node.next
+                n+=1
+
+        
+
            
 
     def pop(self)->int:
@@ -168,10 +197,10 @@ class TestLinkedList(unittest.TestCase):
 
     def test_unshift(self):
         someList = self.populate_list()
-        unshifted = someList.unshift(99)
-        self.assertEqual(unshifted.head.val,99)
-        self.assertEqual(type(unshifted),SinglyLinkedList)
-        self.assertEqual(unshifted.length,5)
+        someList.unshift(99)
+        self.assertEqual(someList.head.val,99)
+        self.assertEqual(type(someList),SinglyLinkedList)
+        self.assertEqual(someList.length,5)
 
 
     def test_get(self):
@@ -180,6 +209,19 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(someList.get(0),1)
         self.assertEqual(someList.get(3),9)
         self.assertFalse(someList.get(11))
+
+    def test_insert(self):
+        someList = self.populate_list()
+        someList.insert(3,100)
+        someList.insert(9,99)
+
+        self.assertEqual(someList.length,6)
+        self.assertEqual(someList.get(3),100)
+        self.assertEqual(someList.get(5),99)
+        for i in range(someList.length):
+            print(someList.get(i))
+        
+
         
 
 
