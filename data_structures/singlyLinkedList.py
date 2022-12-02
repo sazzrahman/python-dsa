@@ -32,7 +32,7 @@ class SinglyLinkedList:
             self.length += 1
 
         else:
-          # push to the current tail's next node
+            # push to the current tail's next node
             self.tail.next = new_node
             # also make the new new node the new tail
             self.tail = new_node
@@ -85,7 +85,6 @@ class SinglyLinkedList:
         """
         returns the ith item's value in the Linked List
         """
-
         if i <0 or i>self.length-1:
             return None
         
@@ -94,7 +93,7 @@ class SinglyLinkedList:
         
         while n <= i:
             if n==i:
-                return current_node.val
+                return current_node
             current_node = current_node.next
             n+=1
 
@@ -107,24 +106,24 @@ class SinglyLinkedList:
             self.push(val)
 
         else:
-            n = 0
-            current_node = self.head
-            
-            while n <= idx-1:
-                if n==idx-1:
-                    # the prev node is modified in place
-                    prev_node = current_node
-                    next_node = current_node.next
-                    new_node = Node(val)
-                    # the new node's tail should have all next nodes
-                    new_node.next = next_node
+            prev_node = self.get(idx-1)
+            next_node = prev_node.next
+            new_node = Node(val)
+            new_node.next = next_node
+            prev_node.next = new_node
+            self.length +=1
 
-                    # the node before it should have the current node
-                    prev_node.next = new_node
-                    self.length +=1
+    def remove(self, idx:int)->None:
+        """
+        removes a node at given index
+        """
+        prev_node = self.get(idx-1)
+        if prev_node:
+            current_node = prev_node.next
+            next_node = current_node.next
+            prev_node.next = next_node
+            self.length -=1
 
-                current_node = current_node.next
-                n+=1
 
         
 
@@ -206,8 +205,8 @@ class TestLinkedList(unittest.TestCase):
     def test_get(self):
         someList = self.populate_list()
 
-        self.assertEqual(someList.get(0),1)
-        self.assertEqual(someList.get(3),9)
+        self.assertEqual(someList.get(0).val,1)
+        self.assertEqual(someList.get(3).val,9)
         self.assertFalse(someList.get(11))
 
     def test_insert(self):
@@ -215,15 +214,21 @@ class TestLinkedList(unittest.TestCase):
         someList.insert(3,100)
         someList.insert(9,99)
 
+
         self.assertEqual(someList.length,6)
-        self.assertEqual(someList.get(3),100)
-        self.assertEqual(someList.get(5),99)
-        for i in range(someList.length):
-            print(someList.get(i))
+        self.assertEqual(someList.get(3).val,100)
+        self.assertEqual(someList.get(5).val,99)
         
 
-        
+    def test_remove(self):
+        someList = self.populate_list()
+        someList.remove(2)
 
+        self.assertEqual(someList.length,3)
+        self.assertEqual(someList.get(2).val,9)
+        self.assertEqual(someList.tail.val,9)
+
+        
 
 if __name__ == "__main__":
     unittest.main()
