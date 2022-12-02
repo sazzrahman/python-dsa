@@ -1,10 +1,6 @@
-
+import unittest
 # Singly Linked List
 # push, pop, insert, remove, get, shift, unshift
-
-
-
-import unittest
 
 
 class Node:
@@ -126,8 +122,6 @@ class SinglyLinkedList:
 
 
         
-
-           
 
     def pop(self)->int:
         """
