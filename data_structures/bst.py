@@ -70,6 +70,38 @@ class BinarySearchTree:
 
         else:
             return self.find_next(val,self.root)
+
+
+    def breadth_first_search(self,val:int,queue:list)->Node:
+        # queue must contain the root in the first pass
+        # if there are elements in the node
+        # q_vals = [i.val for i in queue]
+        # print(q_vals)
+        if len(queue)>0:
+            current_node = queue.pop()
+            if current_node.val == val:
+                return current_node
+
+            if current_node.left:
+                queue.insert(0,current_node.left)
+            if current_node.right:
+                queue.insert(0,current_node.right)
+
+            return self.breadth_first_search(val,queue)
+
+        else:
+            return None
+
+        
+
+
+    def depth_first_search(self,node:Node)->list:
+        pass
+
+        
+
+
+        
         
 
 class TestBinarySearchTree(unittest.TestCase):
@@ -99,9 +131,23 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(someTree.find(4).val, someTree.root.val)
         self.assertEqual(someTree.find(1).val, someTree.root.left.left.val,1)
         self.assertFalse(someTree.find(99))
-       
 
-    
+
+    def test_bfs(self):
+        someTree = BinarySearchTree()
+
+        someTree.insert(4)
+        someTree.insert(9)
+        someTree.insert(3)
+        someTree.insert(1)
+        someTree.insert(22)
+        someTree.insert(36)
+
+        queue = [someTree.root]
+        someTree.breadth_first_search(99,queue)
+        self.assertFalse(someTree.find(99))
+
+
 
 
 if __name__ == "__main__":
