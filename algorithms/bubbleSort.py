@@ -5,9 +5,7 @@ import argparse
 # works well when array is partially sorted
 
 
-
-
-def bubble_sort(arr:list,l:int) -> list:
+def bubble_sort(arr: list, l: int) -> list:
     """
     arr : a list of unsorted numbers
     returns a sorted list
@@ -19,19 +17,18 @@ def bubble_sort(arr:list,l:int) -> list:
 
         if arr[i] > arr[i+1]:
             # store the values before swapping
-            a,b = arr[i], arr[i+1]
+            a, b = arr[i], arr[i+1]
             arr[i] = b
             arr[i+1] = a
-            i+=1
+            i += 1
         else:
-            i+=1
-    return bubble_sort(arr,l-1)
-        
+            i += 1
+    return bubble_sort(arr, l-1)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--arr",nargs="+",type=float)
+    parser.add_argument("--arr", nargs="+", type=float)
     args = parser.parse_args()
     l = len(args.arr)
-    print(bubble_sort(args.arr,l))
-
+    print(bubble_sort(args.arr, l))
