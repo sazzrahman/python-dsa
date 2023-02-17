@@ -1,6 +1,3 @@
-# reformat : SHIFT + OPTION + F
-
-
 import unittest
 
 
@@ -17,3 +14,5 @@ class TestMethod(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# reformat : SHIFT + OPTION + F
