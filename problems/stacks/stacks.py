@@ -4,6 +4,13 @@ import unittest
 
 
 
+def calculate(s:str)->int:
+
+    return None
+
+
+
+
 class TestMethod(unittest.TestCase):
     def test_base(self):
         

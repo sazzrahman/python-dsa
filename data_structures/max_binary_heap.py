@@ -54,7 +54,6 @@ class TestMethod(unittest.TestCase):
         for item in [2,9,11,0,33,67,19]:
             current_heap = heap.insert(item)
             print(current_heap)
-
         self.assertTrue(False)
 
 

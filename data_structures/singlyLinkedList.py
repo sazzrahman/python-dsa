@@ -1,9 +1,12 @@
 import unittest
-# Singly Linked List
-# push, pop, insert, remove, get, shift, unshift
 
 
 class Node:
+    """
+    Node class for the Singly Linked List
+    Has a value and a pointer to the next node
+    """
+
     def __init__(self, val) -> None:
         self.val = val
         self.next = None
