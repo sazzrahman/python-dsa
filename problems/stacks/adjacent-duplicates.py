@@ -46,8 +46,25 @@ def remove_duplicates(s: str) -> int:
     return stack.stack
 
 
+def valid_parenthesis(s: str) -> str:
+    i = 0
+    char_stack = Stack()
+    parenthesis_stack = Stack()
+    while i < len(s):
+        current_char = s[i]
+        current_parenthesis = current_char if current_char in [
+            "(", ")"] else None
+
+        if current_parenthesis:
+            prev_parenthesis = parenthesis_stack.get()
+            if not prev_parenthesis and current_parenthesis == ")":
+
+        if current_char:
+            pass
+
+
 class TestMethod(unittest.TestCase):
-    def test_base(self):
+    def test_adjacent_duplicates(self):
 
         base_input = "sadkkdassa"
         short_input = "abbaaca"
@@ -55,6 +72,9 @@ class TestMethod(unittest.TestCase):
         print(remove_duplicates(short_input))
 
         self.assertTrue(False)
+
+    def test_valid_parenthesis(self):
+        base_input = "ab)cca(spo)(sc(s)("
 
 
 if __name__ == "__main__":
